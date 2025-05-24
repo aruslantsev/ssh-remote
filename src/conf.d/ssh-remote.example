@@ -1,0 +1,4 @@
+PORT=10022
+IDENTITYFILE="/etc/ssh-remote/id_ed25519_nopasswd"
+USER="nobody"
+HOST="example.com"
