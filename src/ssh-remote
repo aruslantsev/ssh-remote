@@ -12,9 +12,9 @@
 # You should have received a copy of the GNU General Public License along with this program.
 # If not, see <https://www.gnu.org/licenses/>.
 
-sleep 5
-source ${1}
-ssh \
+sleep 5 \
+&& source ${1} \
+&& ssh \
         -o TCPKeepAlive=no \
         -o ExitOnForwardFailure=yes \
         -o ConnectTimeout=15 \
