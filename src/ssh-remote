@@ -22,6 +22,6 @@ ssh \
         -o ServerAliveCountMax=3 \
         -o StrictHostKeyChecking=no \
         -o UserKnownHostsFile=/dev/null \
-        -N -R $PORT:localhost:22 \
-        -i $IDENTITYFILE \
-        $USER@$HOST || sleep 5
+        -N -R ${REMOTE_PORT}:localhost:${DESTINATION_PORT:-22} \
+        -i ${IDENTITYFILE} \
+        ${USER}@${HOST} || sleep 5
