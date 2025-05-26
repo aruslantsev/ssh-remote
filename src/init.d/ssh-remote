@@ -1,0 +1,11 @@
+#!/sbin/openrc-run
+# Copyright 2025 Andrei Ruslantsev
+# Distributed under the terms of the GNU General Public License v2
+
+supervisor="supervise-daemon"
+CFG_NAME=$(echo ${RC_SVCNAME} | cut -d '.' -f 2)
+command="/usr/bin/ssh-remote /etc/conf.d/ssh-remote.${CFG_NAME}"
+
+depend() {
+	use logger dns net
+}

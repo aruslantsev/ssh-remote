@@ -1,0 +1,14 @@
+[Unit]
+Description=SSH tunnel, config %I
+Requires=network-online.target
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStartPre=/bin/sleep 5
+ExecStart=/usr/bin/ssh-remote /etc/ssh-remote/%i
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

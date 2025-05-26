@@ -1,0 +1,7 @@
+Package: ssh-remote
+Version: {{ VERSION }}
+Architecture: all
+Depends: openssh-client, bash
+Maintainer: Andrei Ruslantsev <test@example.com>
+Description: Sets up remote tunnel
+ Sets up remote tunnel
