@@ -16,9 +16,7 @@ Sets up remote tunnel
 %install
 install -D -m 644 src/systemd/ssh-remote@.service %{buildroot}%{_unitdir}/ssh-remote@.service
 install -D -m 644 src/conf.d/ssh-remote.example %{buildroot}%{_sysconfdir}/ssh-remote/ssh-remote.example
-install -D -m 755 src/ssh-remote %{buildroot}%{_bindir}/ssh-remote
 
 %files
 %{_unitdir}/ssh-remote@.service
-%{_bindir}/ssh-remote
 %config %{_sysconfdir}/ssh-remote/ssh-remote.example

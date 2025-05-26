@@ -3,8 +3,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 supervisor="supervise-daemon"
-CFG_NAME=$(echo ${RC_SVCNAME} | cut -d '.' -f 2)
-command="/usr/bin/ssh-remote /etc/conf.d/ssh-remote.${CFG_NAME}"
+supervise_daemon_args="-D 5"
+
+source /etc/conf.d/${RC_SVCNAME}
+command="ssh"
+command_args="-o TCPKeepAlive=no -o ExitOnForwardFailure=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -N -R ${REMOTE_PORT}:localhost:${DESTINATION_PORT:-22} -i ${IDENTITYFILE} ${USER}@${HOST}"
 
 depend() {
 	use logger dns net

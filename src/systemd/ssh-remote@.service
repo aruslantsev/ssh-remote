@@ -6,7 +6,8 @@ After=network-online.target
 
 [Service]
 ExecStartPre=/bin/sleep 5
-ExecStart=/usr/bin/ssh-remote /etc/ssh-remote/%i
+ExecStart=ssh -o TCPKeepAlive=no -o ExitOnForwardFailure=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -N -R ${REMOTE_PORT}:localhost:${DESTINATION_PORT} -i ${IDENTITYFILE} ${USER}@${HOST}
+EnvironmentFile=/etc/ssh-remote/ssh-remote.%i
 Restart=always
 RestartSec=5
 

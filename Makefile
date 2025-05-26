@@ -11,8 +11,6 @@ deb:
 	cat build/control.template | sed -e "s/{{ VERSION }}/${VERSION}/g" > build/control
 	rm -r ssh-remote_$(VERSION)-1_all || echo Previous build does not exist
 	mkdir ssh-remote_$(VERSION)-1_all
-	mkdir -p ssh-remote_$(VERSION)-1_all/usr/bin
-	cp src/ssh-remote ssh-remote_$(VERSION)-1_all/usr/bin
 	mkdir -p ssh-remote_$(VERSION)-1_all/usr/lib/systemd/system
 	cp src/systemd/ssh-remote@.service ssh-remote_$(VERSION)-1_all/usr/lib/systemd/system
 	mkdir -p ssh-remote_$(VERSION)-1_all/etc/ssh-remote
