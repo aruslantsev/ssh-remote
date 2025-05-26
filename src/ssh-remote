@@ -24,4 +24,4 @@ ssh \
         -o UserKnownHostsFile=/dev/null \
         -N -R ${REMOTE_PORT}:localhost:${DESTINATION_PORT:-22} \
         -i ${IDENTITYFILE} \
-        ${USER}@${HOST} || sleep 5
+        ${USER}@${HOST}
