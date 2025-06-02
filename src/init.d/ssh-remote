@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 supervisor="supervise-daemon"
-supervise_daemon_args="-D 5"
+supervise_daemon_args="-D 5 -m 0"
 
 source /etc/conf.d/${RC_SVCNAME}
 command="ssh"
