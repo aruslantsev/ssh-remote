@@ -5,10 +5,15 @@
 supervisor="supervise-daemon"
 supervise_daemon_args="-D 5 -m 0"
 
-source /etc/conf.d/${RC_SVCNAME}
+if [ -f "/etc/conf.d/${RC_SVCNAME}" ]; then
+  source /etc/conf.d/${RC_SVCNAME}
+else
+  echo "File /etc/conf.d/${RC_SVCNAME}" does not exist"
+fi
+
 command="ssh"
 command_args="-o TCPKeepAlive=no -o ExitOnForwardFailure=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -N -R ${REMOTE_PORT}:localhost:${DESTINATION_PORT:-22} -i ${IDENTITYFILE} ${USER}@${HOST}"
 
 depend() {
-	use logger dns net
+  use logger dns net
 }
