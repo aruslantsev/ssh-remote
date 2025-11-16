@@ -2,13 +2,22 @@
 # Copyright 2025 Andrei Ruslantsev
 # Distributed under the terms of the GNU General Public License v2
 
+description="set up remote tunnel using ssh"
 supervisor="supervise-daemon"
 supervise_daemon_args="-D 5 -m 0"
 
-source /etc/conf.d/${RC_SVCNAME}
 command="ssh"
-command_args="-o TCPKeepAlive=no -o ExitOnForwardFailure=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -N -R ${REMOTE_PORT}:localhost:${DESTINATION_PORT:-22} -i ${IDENTITYFILE} ${USER}@${HOST}"
+command_args="-o TCPKeepAlive=no -o ExitOnForwardFailure=yes -o ConnectTimeout=15 -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -N -R ${remote_port}:localhost:${destination_port:-22} -i ${identityfile} ${remote_user}@${remote_host}"
 
 depend() {
 	use logger dns net
+}
+
+start_pre() {
+	if [ "${RC_SVCNAME#*.}" = "$RC_SVCNAME" ]; then
+		eerror "${RC_SVCNAME} cannot be started directly. You must create"
+		eerror "symbolic links to it add those to the appropriate runlevels."
+		return 1
+	fi
+
 }

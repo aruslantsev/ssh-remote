@@ -1,5 +1,8 @@
 # Change Log
 
+# 0.6 - 2025-11-16
+- Use supervise-daemon features
+
 # 0.5 - 2025-07-09
 - Unlimited respawn
 
